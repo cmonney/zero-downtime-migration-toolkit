@@ -1,0 +1,128 @@
+# .gitattributes
+# Normalise line endings to LF in the repository; checkout as LF on all
+# platforms. Windows developers using Git for Windows will have CRLF in
+# their working tree if they set core.autocrlf=true locally, but the
+# repository always stores LF. This eliminates spurious diffs caused by
+# OS-level line-ending differences.
+
+# -----------------------------------------------------------------------
+# Default: text auto-detection with LF normalisation
+# -----------------------------------------------------------------------
+* text=auto eol=lf
+
+# -----------------------------------------------------------------------
+# Source code — always text, always LF
+# -----------------------------------------------------------------------
+*.cs        text eol=lf
+*.csx       text eol=lf
+*.cake      text eol=lf
+
+# Project and solution files
+*.csproj    text eol=lf
+*.fsproj    text eol=lf
+*.sln       text eol=lf
+*.slnx      text eol=lf
+*.props     text eol=lf
+*.targets   text eol=lf
+
+# Web / config
+*.json      text eol=lf
+*.jsonc     text eol=lf
+*.xml       text eol=lf
+*.config    text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.toml      text eol=lf
+*.ini       text eol=lf
+*.env       text eol=lf
+
+# Infrastructure
+*.bicep     text eol=lf
+*.bicepparam text eol=lf
+*.tf        text eol=lf
+*.tfvars    text eol=lf
+
+# SQL
+*.sql       text eol=lf
+
+# Shell scripts — LF mandatory; CRLF in a shell script breaks execution
+*.sh        text eol=lf
+*.bash      text eol=lf
+
+# Docker
+Dockerfile* text eol=lf
+*.dockerfile text eol=lf
+docker-compose*.yml text eol=lf
+
+# Documentation and markup
+*.md        text eol=lf
+*.txt       text eol=lf
+*.rst       text eol=lf
+*.csv       text eol=lf
+
+# Editor / tooling config
+.editorconfig text eol=lf
+.gitattributes text eol=lf
+.gitignore  text eol=lf
+
+# -----------------------------------------------------------------------
+# Binary files — mark explicitly so git never attempts text conversion
+# -----------------------------------------------------------------------
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.svg       binary
+*.webp      binary
+*.woff      binary
+*.woff2     binary
+*.ttf       binary
+*.eot       binary
+
+# .NET build outputs — should not normally be committed, but mark as
+# binary in case they slip past the .gitignore
+*.dll       binary
+*.exe       binary
+*.pdb       binary
+*.nupkg     binary
+*.snupkg    binary
+
+# Archives
+*.zip       binary
+*.tar       binary
+*.gz        binary
+*.7z        binary
+
+# -----------------------------------------------------------------------
+# Diff drivers — improve readability of diffs for structured file types
+# -----------------------------------------------------------------------
+
+# Show C# method signatures in diff context lines
+*.cs   diff=csharp
+
+# -----------------------------------------------------------------------
+# Export ignore — exclude developer tooling from `git archive` releases
+# -----------------------------------------------------------------------
+.github/            export-ignore
+.editorconfig       export-ignore
+.gitattributes      export-ignore
+.gitignore          export-ignore
+tools/              export-ignore
+tests/              export-ignore
+infra/              export-ignore
+docs/               export-ignore
+
+# -----------------------------------------------------------------------
+# Linguist — GitHub language statistics
+# -----------------------------------------------------------------------
+
+# Treat Bicep as Infrastructure rather than letting it skew the language bar
+*.bicep     linguist-language=Bicep
+
+# Do not count SQL seed scripts in the C# language total
+tools/seed/ linguist-detectable=false
+
+# Documentation does not count towards language statistics
+docs/       linguist-documentation=true
+*.md        linguist-documentation=true
