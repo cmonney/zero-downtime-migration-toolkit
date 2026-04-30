@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.SourceA</AssemblyName>
+    <RootNamespace>Migration.SourceA</RootNamespace>
+    <Description>
+      Source A data access layer — read/write against the practice-management-style
+      legacy SQL Server database. This project will contain repository interfaces and
+      their SQL Server implementations. See src/Migration.SourceA/TODO.md.
+    </Description>
+  </PropertyGroup>
+
+  <!-- TODO: add package references once the implementation phase begins -->
+
+</Project>

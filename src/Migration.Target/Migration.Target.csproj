@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.Target</AssemblyName>
+    <RootNamespace>Migration.Target</RootNamespace>
+    <Description>
+      Target data access layer — read/write against the consolidated SQL Server
+      database. This project will contain repository interfaces and their SQL Server
+      implementations for the canonical unified schema. See src/Migration.Target/TODO.md.
+    </Description>
+  </PropertyGroup>
+
+  <!-- TODO: add package references once the implementation phase begins -->
+
+</Project>

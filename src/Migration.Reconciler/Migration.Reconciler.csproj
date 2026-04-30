@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.Reconciler</AssemblyName>
+    <RootNamespace>Migration.Reconciler</RootNamespace>
+    <Description>
+      Reconciliation engine. Computes normalised per-row checksums for each logical
+      entity across all three databases and surfaces differences by named drift category.
+      See ADR 0003 and src/Migration.Reconciler/TODO.md.
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Migration.Contracts\Migration.Contracts.csproj" />
+    <ProjectReference Include="..\Migration.SourceA\Migration.SourceA.csproj" />
+    <ProjectReference Include="..\Migration.SourceB\Migration.SourceB.csproj" />
+    <ProjectReference Include="..\Migration.Target\Migration.Target.csproj" />
+  </ItemGroup>
+
+  <!-- TODO: add package references once the implementation phase begins -->
+
+</Project>

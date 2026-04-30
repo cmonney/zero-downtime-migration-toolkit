@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.Contracts</AssemblyName>
+    <RootNamespace>Migration.Contracts</RootNamespace>
+    <Description>
+      Shared contracts: command and query DTOs, domain events, idempotency key types,
+      reconciliation report models, and the ICutoverPhase enumeration. Referenced by all
+      other projects to avoid circular dependencies. See src/Migration.Contracts/TODO.md.
+    </Description>
+  </PropertyGroup>
+
+  <!-- TODO: add package references once the implementation phase begins -->
+
+</Project>

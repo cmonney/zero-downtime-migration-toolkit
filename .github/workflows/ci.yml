@@ -1,0 +1,120 @@
+# CI — build, test, and cutover SLO verification
+#
+# This workflow runs on every push to main and on every pull request.
+# It builds the solution, runs unit tests, spins up the Docker Compose
+# services, runs integration tests, and finally runs the cutover SLO
+# test that drives synthetic load throughout a full phase-A-to-D sequence.
+#
+# Steps that reference projects not yet implemented are commented out
+# with a TODO marker so the workflow remains valid YAML.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    name: Build and test (.NET 10)
+    runs-on: ubuntu-latest
+
+    steps:
+      # ----------------------------------------------------------------
+      # Checkout
+      # ----------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ----------------------------------------------------------------
+      # .NET setup — use the version pinned in global.json if present,
+      # otherwise fall back to the 10.0.x channel.
+      # ----------------------------------------------------------------
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # ----------------------------------------------------------------
+      # Restore dependencies for the whole solution.
+      # ----------------------------------------------------------------
+      - name: Restore dependencies
+        run: dotnet restore ZeroDowntimeMigration.sln
+
+      # ----------------------------------------------------------------
+      # Build with TreatWarningsAsErrors=true (set in Directory.Build.props).
+      # Any warning promoted to error here will fail the build.
+      # ----------------------------------------------------------------
+      - name: Build
+        run: dotnet build ZeroDowntimeMigration.sln --no-restore --configuration Release
+
+      # ----------------------------------------------------------------
+      # Unit tests — no Docker required.
+      # dotnet test in .NET 10 uses the Microsoft Testing Platform (MTP)
+      # by default. Test results are published as a GitHub Actions summary.
+      # ----------------------------------------------------------------
+      # TODO: enable once Migration.Reconciler.Tests is implemented
+      # - name: Run unit tests
+      #   run: >
+      #     dotnet test tests/Migration.Reconciler.Tests
+      #     --no-build
+      #     --configuration Release
+      #     --logger "trx;LogFileName=unit-test-results.trx"
+      #
+      # - name: Publish unit test results
+      #   uses: dorny/test-reporter@v1
+      #   if: always()
+      #   with:
+      #     name: Unit test results
+      #     path: '**/unit-test-results.trx'
+      #     reporter: dotnet-trx
+
+      # ----------------------------------------------------------------
+      # Start the Docker Compose services (database containers).
+      # Health checks on each container ensure they are ready before tests
+      # begin; the compose file TODO documents what health checks are needed.
+      # ----------------------------------------------------------------
+      # TODO: enable once docker-compose.yml is fully wired with init scripts
+      # - name: Start Docker Compose services
+      #   run: docker compose up -d --wait
+
+      # ----------------------------------------------------------------
+      # Integration tests — requires all three database containers.
+      # ----------------------------------------------------------------
+      # TODO: enable once Migration.Integration.Tests is implemented
+      # - name: Run integration tests
+      #   run: >
+      #     dotnet test tests/Migration.Integration.Tests
+      #     --no-build
+      #     --configuration Release
+      #     --logger "trx;LogFileName=integration-test-results.trx"
+
+      # ----------------------------------------------------------------
+      # Cutover SLO test — drives synthetic load through the full
+      # phase-A-to-D sequence and asserts SLOs at each phase boundary.
+      # This is the canonical automated evidence for the zero-downtime claim.
+      # ----------------------------------------------------------------
+      # TODO: enable once Migration.Cutover.Tests and the load generator are implemented
+      # - name: Run cutover SLO test
+      #   run: >
+      #     dotnet test tests/Migration.Cutover.Tests
+      #     --no-build
+      #     --configuration Release
+      #     --logger "trx;LogFileName=cutover-test-results.trx"
+
+      # ----------------------------------------------------------------
+      # Format check — fails if any file is not formatted per .editorconfig.
+      # Run 'dotnet format' locally before pushing to avoid this failure.
+      # ----------------------------------------------------------------
+      - name: Check formatting
+        run: dotnet format ZeroDowntimeMigration.sln --verify-no-changes --no-restore
+
+      # ----------------------------------------------------------------
+      # Tear down Docker Compose services regardless of test outcome.
+      # ----------------------------------------------------------------
+      # TODO: enable once docker-compose.yml is fully wired
+      # - name: Stop Docker Compose services
+      #   if: always()
+      #   run: docker compose down -v

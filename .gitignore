@@ -1,0 +1,77 @@
+# Binaries
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.user
+*.vshost.exe
+
+# Build output
+out/
+artifacts/
+publish/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Visual Studio
+.vs/
+*.suo
+*.sln.docstates
+*.userprefs
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# dotnet tools
+.dotnet/
+.tools/
+.tool-manifest
+
+# Test results
+TestResults/
+coverage/
+*.trx
+*.coverage
+*.coveragexml
+lcov.info
+
+# OS artefacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker
+docker-compose.override.yml
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# SQL Server volume data
+infra/docker/volumes/
+
+# Azure CLI
+.azure/
+
+# Bicep compiled output
+*.json
+!**/appsettings*.json
+!**/launchSettings.json
+!Directory.Build.props
+!global.json

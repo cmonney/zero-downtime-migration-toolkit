@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.SourceB</AssemblyName>
+    <RootNamespace>Migration.SourceB</RootNamespace>
+    <Description>
+      Source B data access layer — read/write against the billing-style legacy SQL
+      Server database. This project will contain repository interfaces and their SQL
+      Server implementations. See src/Migration.SourceB/TODO.md.
+    </Description>
+  </PropertyGroup>
+
+  <!-- TODO: add package references once the implementation phase begins -->
+
+</Project>

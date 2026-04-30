@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.Cutover.Tests</AssemblyName>
+    <RootNamespace>Migration.Cutover.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Migration.StranglerApi\Migration.StranglerApi.csproj" />
+    <ProjectReference Include="..\..\src\Migration.Reconciler\Migration.Reconciler.csproj" />
+    <ProjectReference Include="..\..\src\Migration.Contracts\Migration.Contracts.csproj" />
+  </ItemGroup>
+
+  <!-- TODO: add Microsoft.Testing.Platform, xUnit, FluentAssertions, and load-generator harness once implementation begins -->
+
+</Project>

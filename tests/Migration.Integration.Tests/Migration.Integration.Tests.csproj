@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.Integration.Tests</AssemblyName>
+    <RootNamespace>Migration.Integration.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Migration.StranglerApi\Migration.StranglerApi.csproj" />
+    <ProjectReference Include="..\..\src\Migration.Reconciler\Migration.Reconciler.csproj" />
+    <ProjectReference Include="..\..\src\Migration.Contracts\Migration.Contracts.csproj" />
+  </ItemGroup>
+
+  <!-- TODO: add Microsoft.Testing.Platform, xUnit, FluentAssertions, and Testcontainers once implementation begins -->
+
+</Project>

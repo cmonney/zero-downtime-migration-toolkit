@@ -1,0 +1,125 @@
+# docker-compose.yml — zero-downtime-migration-toolkit
+#
+# MVP STATUS: INCOMPLETE
+#
+# This file defines the four services required to run the toolkit locally.
+# The service definitions are stubs: images and port mappings are correct,
+# but the following are not yet wired:
+#
+#   TODO: add per-service init SQL scripts (mounted from tools/seed/)
+#   TODO: add healthcheck blocks for each database service
+#   TODO: add a shared Docker network and assign all services to it
+#   TODO: add environment variable files (.env.example) for credentials
+#   TODO: add volume definitions for persistent database storage
+#   TODO: wire the strangler-api service with connection strings to all three databases
+#
+# Until these are complete, 'docker compose up' will start the database
+# containers but the strangler API will not connect to them.
+
+services:
+
+  # -------------------------------------------------------------------------
+  # source-a
+  #
+  # SQL Server 2022 hosting the practice-management-style legacy schema.
+  # Configured with Latin1_General_CI_AS collation to model the real-world
+  # collation drift that makes migrations hard. Will be seeded from
+  # tools/seed/source-a/ with deliberate encoding and precision inconsistencies.
+  #
+  # TODO: mount init script from tools/seed/source-a/init.sql
+  # TODO: add HEALTHCHECK using sqlcmd to verify the instance is ready
+  # TODO: configure SERVER_COLLATION environment variable once confirmed
+  # -------------------------------------------------------------------------
+  source-a:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Dev_Password_SourceA_1!"
+      # Development credential — see SECURITY.md. Not a secret.
+    ports:
+      - "1433:1433"
+    # TODO: volumes:
+    #   - source-a-data:/var/opt/mssql
+
+  # -------------------------------------------------------------------------
+  # source-b
+  #
+  # SQL Server 2022 hosting the billing-style legacy schema.
+  # Uses a different collation from Source A (Latin1_General_CS_AS, case-sensitive)
+  # to model the collation inconsistency between the two sources. Will be seeded
+  # from tools/seed/source-b/ with trailing whitespace and mixed-UTC datetime data.
+  #
+  # TODO: mount init script from tools/seed/source-b/init.sql
+  # TODO: add HEALTHCHECK using sqlcmd to verify the instance is ready
+  # -------------------------------------------------------------------------
+  source-b:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Dev_Password_SourceB_1!"
+      # Development credential — see SECURITY.md. Not a secret.
+    ports:
+      - "1434:1433"
+    # TODO: volumes:
+    #   - source-b-data:/var/opt/mssql
+
+  # -------------------------------------------------------------------------
+  # target
+  #
+  # SQL Server 2022 hosting the consolidated target schema.
+  # Configured with a modern case-sensitive UTF-8-compatible collation
+  # (Latin1_General_100_CS_AS_SC_UTF8). Will be seeded with the canonical
+  # unified schema from tools/seed/target/init.sql. Starts empty; the
+  # reconciler and dual-writer populate it during the cutover sequence.
+  #
+  # TODO: mount init script from tools/seed/target/init.sql
+  # TODO: add HEALTHCHECK using sqlcmd to verify the instance is ready
+  # TODO: set MSSQL_COLLATION environment variable
+  # -------------------------------------------------------------------------
+  target:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Dev_Password_Target_1!"
+      # Development credential — see SECURITY.md. Not a secret.
+    ports:
+      - "1435:1433"
+    # TODO: volumes:
+    #   - target-data:/var/opt/mssql
+
+  # -------------------------------------------------------------------------
+  # strangler-api
+  #
+  # The ASP.NET Core façade API. Implements four-phase feature-flagged routing
+  # across the three databases. Depends on all three database services being
+  # healthy before starting.
+  #
+  # TODO: build from src/Migration.StranglerApi/Dockerfile (not yet written)
+  # TODO: add depends_on with condition: service_healthy for all three databases
+  # TODO: inject connection strings for source-a, source-b, and target
+  # TODO: inject initial CutoverPhase feature flag value (default: A)
+  # -------------------------------------------------------------------------
+  # strangler-api:
+  #   build:
+  #     context: .
+  #     dockerfile: src/Migration.StranglerApi/Dockerfile
+  #   environment:
+  #     ConnectionStrings__SourceA: "Server=source-a,1433;..."
+  #     ConnectionStrings__SourceB: "Server=source-b,1433;..."
+  #     ConnectionStrings__Target: "Server=target,1433;..."
+  #     CutoverPhase: "A"
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     source-a:
+  #       condition: service_healthy
+  #     source-b:
+  #       condition: service_healthy
+  #     target:
+  #       condition: service_healthy
+
+# TODO: define named volumes for persistent database storage
+# volumes:
+#   source-a-data:
+#   source-b-data:
+#   target-data:

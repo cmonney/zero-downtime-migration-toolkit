@@ -1,0 +1,58 @@
+# CodeQL — static analysis for security vulnerabilities
+#
+# Scans C# source code for security vulnerabilities using GitHub's CodeQL engine.
+# Runs on every pull request against main, on pushes to main, and on a weekly
+# schedule to catch newly published vulnerability patterns against existing code.
+
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Weekly, every Monday at 03:17 UTC
+    - cron: '17 3 * * 1'
+
+jobs:
+  analyse:
+    name: CodeQL analysis (C#)
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Required to upload CodeQL results
+      security-events: write
+      # Required to read the repository contents
+      contents: read
+      # Required to read pull request metadata
+      actions: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # Initialise the CodeQL tools for scanning.
+      - name: Initialise CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: csharp
+          # Use the default query suite plus the security-extended suite for
+          # broader vulnerability coverage.
+          queries: security-extended
+
+      # Build the solution so CodeQL can trace the compilation.
+      # CodeQL requires a successful build to produce accurate results for C#.
+      - name: Build for CodeQL
+        run: dotnet build ZeroDowntimeMigration.sln --configuration Release
+
+      # Perform the CodeQL analysis and upload results to the Security tab.
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:csharp'
