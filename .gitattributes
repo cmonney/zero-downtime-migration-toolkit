@@ -20,7 +20,7 @@
 # Project and solution files
 *.csproj    text eol=lf
 *.fsproj    text eol=lf
-*.sln       text eol=lf
+*.sln       text eol=crlf
 *.slnx      text eol=lf
 *.props     text eol=lf
 *.targets   text eol=lf
@@ -48,6 +48,10 @@
 # Shell scripts — LF mandatory; CRLF in a shell script breaks execution
 *.sh        text eol=lf
 *.bash      text eol=lf
+
+# Windows scripts — CRLF required; cmd.exe and PowerShell both require CRLF
+*.cmd       text eol=crlf
+*.ps1       text eol=crlf
 
 # Docker
 Dockerfile* text eol=lf
@@ -124,5 +128,5 @@ docs/               export-ignore
 tools/seed/ linguist-detectable=false
 
 # Documentation does not count towards language statistics
-docs/       linguist-documentation=true
-*.md        linguist-documentation=true
+docs/*      linguist-documentation
+*.md        linguist-documentation
