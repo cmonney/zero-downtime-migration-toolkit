@@ -39,7 +39,7 @@ jobs:
 
       # Initialise the CodeQL tools for scanning.
       - name: Initialise CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: csharp
           # Use the default query suite plus the security-extended suite for
@@ -53,6 +53,6 @@ jobs:
 
       # Perform the CodeQL analysis and upload results to the Security tab.
       - name: Perform CodeQL analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           category: '/language:csharp'
