@@ -1,0 +1,78 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.SourceA", "src\Migration.SourceA\Migration.SourceA.csproj", "{A1B2C3D4-0001-0000-0000-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.SourceB", "src\Migration.SourceB\Migration.SourceB.csproj", "{A1B2C3D4-0002-0000-0000-000000000002}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.Target", "src\Migration.Target\Migration.Target.csproj", "{A1B2C3D4-0003-0000-0000-000000000003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.StranglerApi", "src\Migration.StranglerApi\Migration.StranglerApi.csproj", "{A1B2C3D4-0004-0000-0000-000000000004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.DualWriter", "src\Migration.DualWriter\Migration.DualWriter.csproj", "{A1B2C3D4-0005-0000-0000-000000000005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.Reconciler", "src\Migration.Reconciler\Migration.Reconciler.csproj", "{A1B2C3D4-0006-0000-0000-000000000006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.Contracts", "src\Migration.Contracts\Migration.Contracts.csproj", "{A1B2C3D4-0007-0000-0000-000000000007}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.Reconciler.Tests", "tests\Migration.Reconciler.Tests\Migration.Reconciler.Tests.csproj", "{B1B2C3D4-0001-0000-0000-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.Integration.Tests", "tests\Migration.Integration.Tests\Migration.Integration.Tests.csproj", "{B1B2C3D4-0002-0000-0000-000000000002}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.Cutover.Tests", "tests\Migration.Cutover.Tests\Migration.Cutover.Tests.csproj", "{B1B2C3D4-0003-0000-0000-000000000003}"
+EndProject
+
+Global
+  GlobalSection(SolutionConfigurationPlatforms) = preSolution
+    Debug|Any CPU = Debug|Any CPU
+    Release|Any CPU = Release|Any CPU
+  EndGlobalSection
+  GlobalSection(ProjectConfigurationPlatforms) = postSolution
+    {A1B2C3D4-0001-0000-0000-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {A1B2C3D4-0001-0000-0000-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {A1B2C3D4-0001-0000-0000-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {A1B2C3D4-0001-0000-0000-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+    {A1B2C3D4-0002-0000-0000-000000000002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {A1B2C3D4-0002-0000-0000-000000000002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {A1B2C3D4-0002-0000-0000-000000000002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {A1B2C3D4-0002-0000-0000-000000000002}.Release|Any CPU.Build.0 = Release|Any CPU
+    {A1B2C3D4-0003-0000-0000-000000000003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {A1B2C3D4-0003-0000-0000-000000000003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {A1B2C3D4-0003-0000-0000-000000000003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {A1B2C3D4-0003-0000-0000-000000000003}.Release|Any CPU.Build.0 = Release|Any CPU
+    {A1B2C3D4-0004-0000-0000-000000000004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {A1B2C3D4-0004-0000-0000-000000000004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {A1B2C3D4-0004-0000-0000-000000000004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {A1B2C3D4-0004-0000-0000-000000000004}.Release|Any CPU.Build.0 = Release|Any CPU
+    {A1B2C3D4-0005-0000-0000-000000000005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {A1B2C3D4-0005-0000-0000-000000000005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {A1B2C3D4-0005-0000-0000-000000000005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {A1B2C3D4-0005-0000-0000-000000000005}.Release|Any CPU.Build.0 = Release|Any CPU
+    {A1B2C3D4-0006-0000-0000-000000000006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {A1B2C3D4-0006-0000-0000-000000000006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {A1B2C3D4-0006-0000-0000-000000000006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {A1B2C3D4-0006-0000-0000-000000000006}.Release|Any CPU.Build.0 = Release|Any CPU
+    {A1B2C3D4-0007-0000-0000-000000000007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {A1B2C3D4-0007-0000-0000-000000000007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {A1B2C3D4-0007-0000-0000-000000000007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {A1B2C3D4-0007-0000-0000-000000000007}.Release|Any CPU.Build.0 = Release|Any CPU
+    {B1B2C3D4-0001-0000-0000-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {B1B2C3D4-0001-0000-0000-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {B1B2C3D4-0001-0000-0000-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {B1B2C3D4-0001-0000-0000-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+    {B1B2C3D4-0002-0000-0000-000000000002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {B1B2C3D4-0002-0000-0000-000000000002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {B1B2C3D4-0002-0000-0000-000000000002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {B1B2C3D4-0002-0000-0000-000000000002}.Release|Any CPU.Build.0 = Release|Any CPU
+    {B1B2C3D4-0003-0000-0000-000000000003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {B1B2C3D4-0003-0000-0000-000000000003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {B1B2C3D4-0003-0000-0000-000000000003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {B1B2C3D4-0003-0000-0000-000000000003}.Release|Any CPU.Build.0 = Release|Any CPU
+  EndGlobalSection
+  GlobalSection(SolutionProperties) = preSolution
+    HideSolutionNode = FALSE
+  EndGlobalSection
+EndGlobal

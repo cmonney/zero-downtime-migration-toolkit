@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.DualWriter</AssemblyName>
+    <RootNamespace>Migration.DualWriter</RootNamespace>
+    <Description>
+      Dual-write orchestrator. Accepts a canonical write command, applies it to the
+      source database via transactional outbox, and idempotently applies it to the
+      target database using a deterministic idempotency key. See src/Migration.DualWriter/TODO.md.
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Migration.Contracts\Migration.Contracts.csproj" />
+    <ProjectReference Include="..\Migration.SourceA\Migration.SourceA.csproj" />
+    <ProjectReference Include="..\Migration.SourceB\Migration.SourceB.csproj" />
+    <ProjectReference Include="..\Migration.Target\Migration.Target.csproj" />
+  </ItemGroup>
+
+  <!-- TODO: add package references once the implementation phase begins -->
+
+</Project>

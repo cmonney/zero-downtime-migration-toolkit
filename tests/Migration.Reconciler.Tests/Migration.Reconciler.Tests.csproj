@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.Reconciler.Tests</AssemblyName>
+    <RootNamespace>Migration.Reconciler.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Migration.Reconciler\Migration.Reconciler.csproj" />
+  </ItemGroup>
+
+  <!-- TODO: add Microsoft.Testing.Platform, xUnit, FluentAssertions, and NSubstitute once implementation begins -->
+
+</Project>

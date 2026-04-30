@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <AssemblyName>Migration.StranglerApi</AssemblyName>
+    <RootNamespace>Migration.StranglerApi</RootNamespace>
+    <Description>
+      The strangler-fig façade API. Implements four-phase feature-flagged routing:
+      read-from-source, shadow-compare, dual-write, and read-from-target. This is the
+      single entry point callers use throughout the cutover. See src/Migration.StranglerApi/TODO.md.
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Migration.Contracts\Migration.Contracts.csproj" />
+    <ProjectReference Include="..\Migration.DualWriter\Migration.DualWriter.csproj" />
+    <ProjectReference Include="..\Migration.SourceA\Migration.SourceA.csproj" />
+    <ProjectReference Include="..\Migration.SourceB\Migration.SourceB.csproj" />
+    <ProjectReference Include="..\Migration.Target\Migration.Target.csproj" />
+  </ItemGroup>
+
+  <!-- TODO: add package references once the implementation phase begins -->
+
+</Project>
