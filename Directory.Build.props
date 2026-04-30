@@ -9,6 +9,13 @@
     <!-- LangVersion=latest resolves to C# 14 on .NET 10 -->
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <!--
+      IDE0005 (remove unused usings) requires GenerateDocumentationFile=true
+      when EnforceCodeStyleInBuild is enabled. Set it here so all projects
+      in the solution satisfy the precondition without per-project overrides.
+      See https://github.com/dotnet/roslyn/issues/41640
+    -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup>
